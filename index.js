@@ -1,9 +1,14 @@
-const express = require('express');
-const {dbConnection} =require('./database/config');
 require('dotenv').config(); //Le dice a Node que busque en el file sysmtem el archivo .env y setea las variables 
+const express = require('express');
+const cors = require('cors')
+const {dbConnection} =require('./database/config');
 
 //Crear el servidor de express
 const app=express();
+
+//Configurar Cors
+app.use(cors);
+
 
 //Conexión con base de datos
 dbConnection();
