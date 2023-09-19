@@ -3,6 +3,7 @@ require('dotenv').config(); //Le dice a Node que busque en el file sysmtem el ar
 
 const dbConnection = async () => {
     try {
+
         await mongoose.connect(process.env.DB_CNN);
         console.log('DB online')
     } catch (error) {
