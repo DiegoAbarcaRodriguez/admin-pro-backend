@@ -4,8 +4,19 @@ const { generarJWT } = require('../helpers/jwt');
 
 const getUsuarios = async (req, res) => {
 
-    const usuario = await Usuario.find({}, 'nombre email role google'); // Denota que campos serán retornados de la colección Usuario
-    res.json({ usuario, token: req.uid });
+    const desde = Number(req.query.desde) || 0;
+
+    const [usuarios, total] = await Promise.all([
+        Usuario.find({}, 'nombre email role google') // Denota que campos serán retornados de la colección Usuario
+        .skip(desde)  //Se salta los registro de la BD indicados
+        .limit(5),
+
+        Usuario.count()
+
+    ]);
+
+    
+    res.json({ usuarios, token: req.uid, total });
 
 
 };

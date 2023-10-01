@@ -18,6 +18,7 @@ const validarJWT = (req, res, next) => {
 
         //Envia en el request subsecuente el uid, ene ste caso al controller subsiguiente
         req.uid=uid;
+        next();
 
 
     } catch (error) {
@@ -26,7 +27,7 @@ const validarJWT = (req, res, next) => {
             msg: 'Token no válido'
         })
     }
-    next();
+    
 }
 
 module.exports = {
