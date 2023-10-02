@@ -22,7 +22,9 @@ router.post('/',
 
 router.put('/:id',
     [   //Middlewares funciones que se ejecutan antes de los controller de una ruta, generalmente para validar la data enviada.
-
+        validarJWT,
+        check('nombre', 'El nombre del hospital es necesario').not().isEmpty(),
+        validarCampos
     ], actualizarHospital
 );
 

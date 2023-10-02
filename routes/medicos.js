@@ -23,7 +23,10 @@ router.post('/',
 
 router.put('/:id',
     [   //Middlewares funciones que se ejecutan antes de los controller de una ruta, generalmente para validar la data enviada.
-
+        validarJWT,
+        check('nombre', 'El nombre del médico es necesario').not().isEmpty(),
+        check('hospitales','Debe ser un id válido de MongoDB').isMongoId(),
+        validarCampos
     ], actualizarMedico
 );
 

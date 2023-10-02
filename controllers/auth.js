@@ -58,7 +58,7 @@ const googleSignIn = async (req, res = response) => {
         if (!usuarioDB) {
             usuario = new Usuario({
                 email,
-                nombre:name,
+                nombre: name,
                 password: '@@@',
                 img: picture,
                 google: true
@@ -90,7 +90,28 @@ const googleSignIn = async (req, res = response) => {
 
 }
 
+const renewToken = async (req, res = response) => {
+    const uid = req.uid;
+    try {
+        const token = await generarJWT(uid);
+
+        res.json({
+            ok: true,
+            token
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Ha ocurrido un error'
+        })
+    }
+
+}
+
 module.exports = {
     login,
-    googleSignIn
+    googleSignIn,
+    renewToken
 }
