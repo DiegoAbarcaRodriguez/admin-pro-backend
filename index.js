@@ -12,6 +12,8 @@ app.use(cors());
 //Lectura y parseo del body
 app.use(express.json());
 
+//Carpeta public
+app.use(express.static('public'));
 
 //Conexión con base de datos
 dbConnection();
