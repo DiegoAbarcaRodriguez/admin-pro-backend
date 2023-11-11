@@ -7,11 +7,13 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
-const { getMedicos, crearMedico, actualizarMedico, borrarMedico } = require('../controllers/medicos')
+const { getMedicos, crearMedico, actualizarMedico, borrarMedico, getMedicoById } = require('../controllers/medicos')
 
 const router = Router();
 
 router.get('/', validarJWT, getMedicos); // Asocia / con la ruta /api/usuarios
+
+router.get('/:id', validarJWT, getMedicoById); // Asocia / con la ruta /api/usuarios
 
 router.post('/',
     [   //Middlewares funciones que se ejecutan antes de los controller de una ruta, generalmente para validar la data enviada.

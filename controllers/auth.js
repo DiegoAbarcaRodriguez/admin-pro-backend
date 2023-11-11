@@ -95,9 +95,21 @@ const renewToken = async (req, res = response) => {
     try {
         const token = await generarJWT(uid);
 
+        const usuario = await Usuario.findById(uid);
+
+        if (!usuario) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'No existe un usuario asociado al json web token!'
+            })
+        }
+
+
+
         res.json({
             ok: true,
-            token
+            token,
+            usuario
         });
 
     } catch (error) {

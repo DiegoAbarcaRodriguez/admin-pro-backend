@@ -49,7 +49,7 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
             return true;
 
             break;
-        case 'usuario':
+        case 'usuarios':
             const usuario = await Usuario.findById(id);
 
             if (!usuario) {

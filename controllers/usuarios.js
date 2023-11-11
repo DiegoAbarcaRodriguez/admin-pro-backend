@@ -7,15 +7,15 @@ const getUsuarios = async (req, res) => {
     const desde = Number(req.query.desde) || 0;
 
     const [usuarios, total] = await Promise.all([
-        Usuario.find({}, 'nombre email role google') // Denota que campos serán retornados de la colección Usuario
-        .skip(desde)  //Se salta los registro de la BD indicados
-        .limit(5),
+        Usuario.find({}, 'nombre email role google img') // Denota que campos serán retornados de la colección Usuario
+            .skip(desde)  //Se salta los registro de la BD indicados
+            .limit(5),
 
         Usuario.count()
 
     ]);
 
-    
+
     res.json({ usuarios, token: req.uid, total });
 
 
@@ -93,8 +93,9 @@ const actualizarUsuario = async (req, res) => {
         }
 
 
+        if (!usuarioDB.google)
+            campos.email = email;
 
-        campos.email = email;
         const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, { new: true });
 
         res.json({
